@@ -1,8 +1,8 @@
-function imgrad = oriented_grad(im, orient, width, nbins)
+function imgrad = oriented_grad(im, angle, width, nbins)
     % Compute oriented gradient for each pixel
    % Parameters:
    %    im: a gray scale image, matrix of size MxN
-   %    orient: angle of orientation to compute, int
+   %    angle: angle of orientation to compute, int
    %    width: width of windows of interest, int
    %    nbins: number of bins, int
    % Returns:
@@ -22,7 +22,7 @@ function imgrad = oriented_grad(im, orient, width, nbins)
    imsmooth = 0;
    
    % reverse rotating
-   imgrad = 0;
+   imgrad = imhist;
    
 
 end

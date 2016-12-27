@@ -15,7 +15,7 @@ function countmap = hist_count(integral_image, width, hoi)
     
     % padding
     pad = int8((width - 1) / 2);
-    Ib(pad+1:end-pad-1, pad+1:end-pad-1) = integral_image;
+%     Ib(pad+1:end-pad-1, pad+1:end-pad-1) = integral_image;
     
     countmap = zeros([M , N]); 
     P = zeros([M + width, N + width]);

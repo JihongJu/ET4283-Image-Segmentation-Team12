@@ -15,38 +15,69 @@ function countmap = hist_count(integral_image, width, hoi)
     
     % padding
     pad = int8((width - 1) / 2);
-%     Ib(pad+1:end-pad-1, pad+1:end-pad-1) = integral_image;
     
-    countmap = zeros([M , N]); 
-    P = zeros([M + width, N + width]);
-    Q = zeros([M + width, N + width]);
-    R = zeros([M + width, N + width]);
-    S = zeros([M + width, N + width]);
-    Ib = zeros([M + width, N + width]);
+    countmap = zeros([M , N]);
+    P = zeros([M + width-1, N + width-1]);
+    Q = zeros([M + width-1, N + width-1]);
+    R = zeros([M + width-1, N + width-1]);
+    S = zeros([M + width-1, N + width-1]);
+    Ib = zeros([M + width-1, N + width-1]);
 
     if hoi == 1
         % upper left values
-        P(width+1 : end, width+1:end) = integral_image;
+        P(pad + 1: M, pad+1:N) = integral_image(1:M-pad,1:N-pad);
         % upper right
-        Q(width+1 : end, 1:N) = integral_image;
+        Q(pad + 1 : M, width : N + pad) = integral_image(1:M-pad,pad+1:N);
         % lower left
-        R(pad+1 : end-pad-1, width+1 : end) = integral_image;
+        R(pad + 1 : M+pad, pad + 1 : N) = integral_image(1:M,1:N-pad);
         % lower right
-        S(pad+1 : end-pad-1, 1 : N) = integral_image;
+        S(pad + 1 : M+pad, width: N + pad) = integral_image(1:M,pad+1:N);
     elseif hoi == 2
         % upper left values
-        P(pad+2 : end-pad, width +1 : end) = integral_image;
+        P(pad + 1 : M+pad, pad + 1 : N) = integral_image(1:M,1:N-pad);
         % upper right
-        Q(pad+2: end-pad, 1 : N) = integral_image;
+        Q(pad + 1 : M, width : N + pad) = integral_image(1:M,pad+1:N);
         % lower left value
-        R(1 : M, width+1 : end) = integral_image;
+        R(width : M + pad, pad + 1 : N) = integral_image(pad+1:M, 1:N-pad);
         % lower right
-        S(1 : M , 1 : N) = integral_image;
+        S(width : M + pad , width : N+pad) = integral_image(pad+1:M, pad+1:N);
     end
     
     % Ib
     Ib = P + S - Q - R;
     % countmap
-    countmap(pad+1 : end-pad, pad+1 : end-pad) = ...
-        Ib(width : end-width, width : end-width);
+    countmap = Ib(pad+1 : pad+M, pad+1 : pad+N);
+    
+    
+%     P = zeros([M + width, N + width]);
+%     Q = zeros([M + width, N + width]);
+%     R = zeros([M + width, N + width]);
+%     S = zeros([M + width, N + width]);
+%     Ib = zeros([M + width, N + width]);
+% 
+%     if hoi == 1
+%         % upper left values
+%         P(width+1 : end, width+1:end) = integral_image;
+%         % upper right
+%         Q(width+1 : end, 1:N) = integral_image;
+%         % lower left
+%         R(pad+1 : end-pad-1, width+1 : end) = integral_image;
+%         % lower right
+%         S(pad+1 : end-pad-1, 1 : N) = integral_image;
+%     elseif hoi == 2
+%         % upper left values
+%         P(pad+2 : end-pad, width +1 : end) = integral_image;
+%         % upper right
+%         Q(pad+2: end-pad, 1 : N) = integral_image;
+%         % lower left value
+%         R(1 : M, width+1 : end) = integral_image;
+%         % lower right
+%         S(1 : M , 1 : N) = integral_image;
+%     end
+%     
+%     % Ib
+%     Ib = P + S - Q - R;
+%     % countmap
+%     countmap(pad+1 : end-pad, pad+1 : end-pad) = ...
+%         Ib(width : end-width, width : end-width);
 end

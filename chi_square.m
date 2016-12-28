@@ -13,5 +13,5 @@ function imchi = chi_square(imhist)
 
     imchi = sum(imchi,3);
 
-return
+end
 

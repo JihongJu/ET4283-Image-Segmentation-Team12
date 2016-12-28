@@ -18,4 +18,4 @@ function  imsmooth = SavitzkyGolay(imchi,framelen)
     imsmooth = imfilter(imchi,ftx);
     imsmooth = imfilter(imsmooth,fty);
 
-return
+end

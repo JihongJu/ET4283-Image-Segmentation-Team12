@@ -15,6 +15,9 @@ function imhist = fast_hist(im, nbins, width)
     
     min_value = double(min(min(im)));
     max_value = double(max(max(im)));
+    % normalized im?
+    im = (im - min_value)./(max_value-min_value);
+    
     intervals = linspace(0, 1+1e-10, nbins+1);
    
     for idx = 1:numel(intervals)-1

@@ -6,9 +6,12 @@ function imchi = chi_square(imhist)
     %   imchi: chi-square distance between
     %          distributions of upper  and lower neighbor windows
 
-hist_g = imhist(:,:,:,1);
-hist_h = imhist(:,:,:,2);
+    hist_g = imhist(:,:,:,1);
+    hist_h = imhist(:,:,:,2);
 
-imchi = ((hist_g - hist_h).^2)./(hist_g + hist_h + eps);
+    imchi = ((hist_g - hist_h).^2)./(hist_g + hist_h + eps);
 
-imchi = sum(imchi,3);
+    imchi = sum(imchi,3);
+
+return
+

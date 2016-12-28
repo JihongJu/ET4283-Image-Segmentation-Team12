@@ -16,10 +16,10 @@ function imgrad = oriented_grad(im, angle, width, nbins)
  
    
    % compute chi-square
-   imchi = 0;
+   imchi = chi_square(imhist);
    
    % smoothing
-   imsmooth = 0;
+   imsmooth = SavitzkyGolay(imchi, 5);
    
    % reverse rotating
    imgrad = imhist;

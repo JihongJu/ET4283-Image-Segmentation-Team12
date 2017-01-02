@@ -15,14 +15,20 @@ function imgrad = oriented_grad(im, angle, width, nbins)
    imhist = fast_hist(imrot, nbins, width);
  
    
-   % compute chi-square
-   imchi = imhist;
-   
+   % compute chi-square distance
+   imchi = chi2dist(imhist(:,:,:,:,1), imhist(:,:,:,:,2));
+   size(imhist)
+%    figure;
+%    imshow(imhist(:,:,:,3,1)/max(max(max(imhist(:,:,:,3,1)))));
+%    figure;
+%    imshow(imhist(:,:,:,3,2)/max(max(max(imhist(:,:,:,3,2)))));
+%    figure;
+%    imshow(imhist(:,:,:,3,2)-imhist(:,:,:,3,1));
    % smoothing
    imsmooth = imchi;
-   
+%    figure;
+%    imshow(imchi/max(max(max(imchi))));
    % reverse rotating
-   imgrad = imsmooth;
-   
+   imgrad = imrotate_inverse(imsmooth, im, angle);
 
 end

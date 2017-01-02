@@ -14,15 +14,15 @@ function imhist = fast_hist(im, nbins, width)
     imhist = zeros([M,N,K,nbins,2]);
     
     % normalization
-    imnorm = double(im - repmat(min(min(im)),[M,N])) ./ double(repmat(max(max(im)), [M,N]));
-    
+%     imnorm = double(im) ./ double(repmat(max(max(im)), [M,N]));
+    imnorm = double(im) / 255;
     
     % calculate interval
     intervals = linspace(0, 1+1e-10, nbins+1);
    
     for idx = 1:numel(intervals)-1
         % binary
-        bitmap = intervals(idx) <= imnorm & imnorm < intervals(idx+1);
+        bitmap = intervals(idx) < imnorm & imnorm <= intervals(idx+1);
         % integral images
         imintegral = cumsum(cumsum(bitmap,1),2);
         % count neighborhood frequency

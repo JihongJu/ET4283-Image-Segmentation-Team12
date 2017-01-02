@@ -18,9 +18,13 @@ function labelmap = segment_image(filename)
     figure;
     imshow(gradmap);
 
-    % find local minimum
-    seeds = 0;
+    % impose local minimum
     
     % watershed segmentation
-    labelmap = gradmap;
+    gradmap = max(gradmap, [], 3);
+    labelmap = watershed(gradmap);
+    Lrgb = label2rgb(labelmap, 'jet', 'w', 'shuffle');
+    figure;
+    imshow(Lrgb);
+    title('Colored watershed label map')
 end

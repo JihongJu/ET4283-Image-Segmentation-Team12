@@ -17,6 +17,7 @@ function labelmap = segment_image(filename)
     gradmap = max(orientmap, [], 4);
     figure;
     imshow(gradmap);
+    title('Oriented gradient map for three channels')
 
     % impose local minimum
     

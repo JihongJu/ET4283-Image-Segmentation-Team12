@@ -17,17 +17,17 @@ function imgrad = oriented_grad(im, angle, width, nbins)
    
    % compute chi-square distance
    imchi = chi2dist(imhist(:,:,:,:,1), imhist(:,:,:,:,2));
-   size(imhist)
-%    figure;
-%    imshow(imhist(:,:,:,3,1)/max(max(max(imhist(:,:,:,3,1)))));
-%    figure;
-%    imshow(imhist(:,:,:,3,2)/max(max(max(imhist(:,:,:,3,2)))));
-%    figure;
-%    imshow(imhist(:,:,:,3,2)-imhist(:,:,:,3,1));
-   % smoothing
-   imsmooth = imchi;
 %    figure;
 %    imshow(imchi/max(max(max(imchi))));
+
+   %% compute chi-square
+   %imchi = chi_square(imhist);
+   
+   %% smoothing 
+   imsmooth = imchi;
+   % TODO try out the influence of smoothing
+   %imsmooth = SavitzkyGolay(imchi, 5);
+   
    % reverse rotating
    imgrad = imrotate_inverse(imsmooth, im, angle);
 

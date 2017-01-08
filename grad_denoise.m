@@ -10,7 +10,7 @@ filled = imfill(BW, 'holes');
 holes = filled & ~BW;
 bigholes = bwareaopen(holes, width);
 smallholes = holes & ~bigholes;
-BW2 = BW | smallholes;
+BW(smallholes)=0;
 
-imout = BW2;
+imout = BW;
 end
